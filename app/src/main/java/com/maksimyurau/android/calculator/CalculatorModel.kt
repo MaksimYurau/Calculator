@@ -1,8 +1,8 @@
 package com.maksimyurau.android.calculator
 
 class CalculatorModel {
-    private var firstArg = 0
-    private var secondArg = 0
+    private var firstArg: Double = 0.0
+    private var secondArg: Double = 0.0
     private val inputStr = StringBuilder()
     private var actionSelected = 0
     private var state: State
@@ -40,7 +40,7 @@ class CalculatorModel {
 
     fun onActionPressed(actionId: Int) {
         if (actionId == R.id.equals && state == State.secondArgInput && inputStr.isNotEmpty()) {
-            secondArg = inputStr.toString().toInt()
+            secondArg = inputStr.toString().toDouble()
             state = State.resultShow
             inputStr.setLength(0)
             when (actionSelected) {
@@ -50,7 +50,7 @@ class CalculatorModel {
                 R.id.division -> inputStr.append(firstArg / secondArg)
             }
         } else if (inputStr.isNotEmpty() && state == State.firstArgInput && actionId != R.id.equals) {
-            firstArg = inputStr.toString().toInt()
+            firstArg = inputStr.toString().toDouble()
             state = State.operationSelected
             actionSelected = actionId
         }
